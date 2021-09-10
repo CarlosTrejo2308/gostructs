@@ -5,6 +5,7 @@ import "fmt"
 type Single struct {
 	head *Node
 	tail *Node
+	Size int
 }
 
 // Add recives an element and inserts it to the end of the linked list
@@ -24,6 +25,8 @@ func (s *Single) Add(element interface{}) error {
 		s.tail.Next = n
 		s.tail = n
 	}
+
+	s.Size++
 	return nil
 }
 
@@ -60,6 +63,7 @@ func (s *Single) Delete(element interface{}) error {
 	// The element is in the head
 	if s.head.Value == element {
 		s.head = s.head.Next
+		s.Size--
 		return nil
 	}
 
@@ -71,6 +75,7 @@ func (s *Single) Delete(element interface{}) error {
 		// Next node is the one to delete
 		if n.Next.Value == element {
 			n.Next = n.Next.Next
+			s.Size--
 			return nil
 		}
 		n = n.Next
@@ -117,13 +122,4 @@ func (s *Single) ReverseTraverse() []interface{} {
 		result = append(result, curr.Value)
 	}
 	return result
-}
-
-// Print, prints all the elements in the list
-func (s *Single) Print() {
-	n := s.head
-	for n != nil {
-		fmt.Print(n.Value, ", ")
-		n = n.Next
-	}
 }

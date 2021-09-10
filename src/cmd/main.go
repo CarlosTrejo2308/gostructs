@@ -7,24 +7,34 @@ import (
 )
 
 func main() {
-	linkedList := &list.Single{}
+	// Create a linked list
+	linkedList := &list.Double{}
+
+	// Add elements
 	linkedList.Add(1)
 	linkedList.Add(4)
 	linkedList.Add("22")
 	linkedList.Add(22)
 	linkedList.Add(20)
 
-	linkedList.Print()
+	list.PrintList(linkedList)
 	fmt.Println("")
-	linkedList.Delete(4)
-	linkedList.Print()
 
-	idx, err := linkedList.Search(20)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("index:", idx)
-	}
+	/*
+		// Delete an element
+		fmt.Println("Deleting element 4")
+		linkedList.Delete(4)
+		linkedList.Print()
 
-	fmt.Printf("%+v", linkedList.ReverseTraverse())
+		// Search an element
+		idx, err := linkedList.Search(20)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println("element: 20 is in index:", idx)
+		}
+
+		// Both traversals
+		fmt.Printf("%+v\n", linkedList.Traverse())
+		fmt.Printf("%+v\n", linkedList.ReverseTraverse())*/
 }
