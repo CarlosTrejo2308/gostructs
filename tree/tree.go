@@ -66,3 +66,62 @@ func (current *TreeNode) searchNode(value int) bool {
 		return current.Right.searchNode(value)
 	}
 }
+
+func (t *Tree) Delete(val int) bool {
+
+	nodeToRemove := t.Root.FindNode(val)
+
+	// Node is not found
+	if nodeToRemove == nil {
+		return false
+	}
+
+	parent := t.Root.FindParent(val)
+
+	// Node is root
+	if parent == nil {
+		t.Root = nil
+		return true
+	}
+
+	count := t.Root.Size()
+
+	// Removing the only node in the tree
+	if count == 1 {
+		t.Root = nil
+		return true
+	}
+
+	// Case 1: Node is a leaf
+	if nodeToRemove.Left == nil && nodeToRemove.Right == nil {
+		// Node is a left child
+		if nodeToRemove.Val < parent.Val {
+			parent.Left = nil
+
+			// Node is a right child
+		} else {
+			parent.Right = nil
+		}
+	}
+
+	// Case 2 and 3: Node has one child
+	if nodeToRemove.Left == nil || nodeToRemove.Right == nil {
+		// Case 2: Node is a left child
+		if nodeToRemove.Val < parent.Val {
+			if nodeToRemove.Left != nil {
+				parent.Left = nodeToRemove.Left
+			} else {
+				parent.Left = nodeToRemove.Right
+			}
+
+			// Case 3: Node is a right child
+		} else {
+			if nodeToRemove.Left != nil {
+				parent.Right = nodeToRemove.Left
+			} else {
+				parent.Right = nodeToRemove.Right
+			}
+		}
+	}
+
+}
